@@ -35,7 +35,7 @@ class LinkedList{
         return this.next
     }
     tail(){
-        let pointer=this.next
+        let pointer=this
         while(pointer.next!==null){
             pointer=pointer.next
         }
@@ -80,13 +80,41 @@ class LinkedList{
         }
         return null
     }
+    toString(){
+        let string=""
+        let pointer=this.next
+        if(pointer===null){
+            return "null"
+        }else{
+            string=string.concat("(",pointer.value)
+            pointer=pointer.next
+        }
+        while(pointer!==null){
+            string=string.concat(") -> (",pointer.value)
+            pointer=pointer.next
+        }
+        string=string.concat("",")-> null")
+        return string
+    }
+    insertAt(value,index){
+        if(index===0){
+            return this.prepend(value)
+        }
+        let pointer=this.next
+        let previous
+        if(index>this.size()) return this.append(value)
+        for(let i=0;i<index;i++){
+            previous=pointer
+            pointer=pointer.next
+        }
+        previous.next=new node(value,pointer)
+    }
 }
-const list= new LinkedList(new node("pierwsza"))
-list.append("druga")
-
-list.append("trzecia")
-
+const list= new LinkedList(new node("first"))
+list.append("second")
+list.append("third")
 list.prepend("zero")
+
 console.log(list)
 console.log("Count: "+ list.size())
 console.log("Start: "+ list.head())
@@ -97,3 +125,6 @@ console.log("End: "+ list.tail())
 console.log("Contains: "+ list.contains("zero"))
 console.log("Not contains: "+ list.contains("czwarta"))
 console.log("Found at: "+ list.find("druga"))
+console.log("String: "+ list.toString())
+list.insertAt("custom",1)
+console.log("String: "+ list.toString())
