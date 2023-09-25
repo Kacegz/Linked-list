@@ -109,6 +109,15 @@ class LinkedList{
         }
         previous.next=new node(value,pointer)
     }
+    removeAt(index){
+        let previous
+        let pointer=this.next
+        for(let i=0;i<index;i++){
+            previous=pointer
+            pointer=pointer.next
+        }
+        previous.next=pointer.next
+    }
 }
 const list= new LinkedList(new node("first"))
 list.append("second")
@@ -127,4 +136,6 @@ console.log("Not contains: "+ list.contains("czwarta"))
 console.log("Found at: "+ list.find("druga"))
 console.log("String: "+ list.toString())
 list.insertAt("custom",1)
+console.log("String: "+ list.toString())
+list.removeAt(1)
 console.log("String: "+ list.toString())
