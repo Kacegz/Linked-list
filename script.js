@@ -5,8 +5,8 @@ class node{
     }
 }
 class LinkedList{
-    constructor(node){
-        this.next=node;
+    constructor(){
+        this.next=null;
     }
     prepend(value){
         this.next=new node(value,this.next)
@@ -45,12 +45,13 @@ class LinkedList{
         let pointer=this
         for(let i=0;i<=index;i++){
             pointer=pointer.next
+            if(pointer===null) return "No item at this index"
         }
         return pointer.value
     }
     pop(){
         let pointer=this.next
-        let previous=this
+        let previous
         while(pointer.next!==null){
             previous=pointer
             pointer=pointer.next
@@ -119,7 +120,8 @@ class LinkedList{
         previous.next=pointer.next
     }
 }
-const list= new LinkedList(new node("first"))
+const list= new LinkedList()
+list.append("first")
 list.append("second")
 list.append("third")
 list.prepend("zero")
@@ -132,8 +134,8 @@ console.log("At 2: "+ list.at(2))
 console.log(list.pop())
 console.log("End: "+ list.tail())
 console.log("Contains: "+ list.contains("zero"))
-console.log("Not contains: "+ list.contains("czwarta"))
-console.log("Found at: "+ list.find("druga"))
+console.log("Not contains: "+ list.contains("fourth"))
+console.log("Found at: "+ list.find("second"))
 console.log("String: "+ list.toString())
 list.insertAt("custom",1)
 console.log("String: "+ list.toString())
